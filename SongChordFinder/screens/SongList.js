@@ -23,12 +23,12 @@ const SongList = () => {
   };
 
   const navigateToFullChords = (selectedSong) => {
-    navigation.navigate('FullChords', { selectedSong });
+    navigation.navigate('FullChord', { selectedSong });
   };
 
   useEffect(() => {
     setSongs(originalSongs);
-  }, [searchTerm]);
+  }, [searchTerm]); 
 
   return (
     <View>
