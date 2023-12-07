@@ -5,13 +5,15 @@ import { useLoadedAssets } from "./hooks/useLoadedAssets";
 import Navigation from "./navigation";
 import { useColorScheme } from "react-native";
 import SongList from "./screens/SongList.js";
-import FullChord from "./screens/FullChords"; // Assuming you have a FullCode component
-import { StyleSheet, SafeAreaView } from "react-native";
+import FullChord from "./screens/FullChords";
+import Artists from "./screens/Artists";
+import ArtistSongs from "./screens/ArtistSongs";
+import Tunner from "./screens/Tunner"; // Assuming you have a Tunner component
+import Profile from "./screens/Profile"; // Assuming you have a Profile component
+import { StyleSheet, SafeAreaView, TouchableOpacity, Text } from "react-native";
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
-import Artists from "./screens/Artists";
-import ArtistSongs from "./screens/ArtistSongs";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -30,6 +32,7 @@ const HomeStackScreen = () => (
     />
   </Stack.Navigator>
 );
+
 const ArtistScreen = () => (
   <Stack.Navigator>
     <Stack.Screen
@@ -50,8 +53,7 @@ const ArtistScreen = () => (
   </Stack.Navigator>
 );
 
-
-export default function App() {
+const App = () => {
   const isLoadingComplete = useLoadedAssets();
   const colorScheme = useColorScheme();
 
@@ -64,11 +66,33 @@ export default function App() {
           <Tab.Navigator>
             <Tab.Screen name="Home" component={HomeStackScreen} />
             <Tab.Screen name="Artists" component={ArtistScreen} />
-            {/* Add more tabs as needed */}
+            <Tab.Screen name="Tunner" component={Tunner} />
           </Tab.Navigator>
+          <TouchableOpacity
+            style={styles.profileButton}
+            onPress={() => console.log("Profile button pressed")}
+          >
+            <Text style={styles.profileButtonText}>Profile</Text>
+          </TouchableOpacity>
         </NavigationContainer>
         <StatusBar style="auto" />
       </SafeAreaProvider>
     );
   }
-}
+};
+
+const styles = StyleSheet.create({
+  profileButton: {
+    position: 'absolute',
+    top: 100,
+    right: 0,
+    padding: 10,
+  },
+  profileButtonText: {
+    color: 'blue',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+});
+
+export default App;
