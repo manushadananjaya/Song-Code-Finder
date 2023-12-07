@@ -7,9 +7,9 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useFocusEffect } from "@react-navigation/native";
 
-const SongList = () => {
+const Artists = ({ route }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [originalSongs, setOriginalSongs] = useState([
     // ... (your existing data)
@@ -43,46 +43,52 @@ const SongList = () => {
     },
     // Add more songs as needed
   ]);
-  const [songs, setSongs] = useState(originalSongs);
+  const [artists, setArtists] = useState([]);
   const navigation = useNavigation();
 
-  const searchSongs = () => {
-    const filteredSongs = originalSongs.filter((song) =>
-      song.title.toLowerCase().includes(searchTerm.toLowerCase())
+  const searchArtists = () => {
+    const uniqueArtists = [...new Set(originalSongs.map((song) => song.artist))];
+    const filteredArtists = uniqueArtists.filter((artist) =>
+      artist.toLowerCase().includes(searchTerm.toLowerCase())
     );
-    setSongs(filteredSongs);
+    setArtists(filteredArtists);
   };
 
-  const navigateToFullChords = (selectedSong) => {
-    navigation.navigate("FullChord", { selectedSong });
+  const navigateToArtistSongs = (artistName) => {
+    const artistSongs = originalSongs.filter((song) => song.artist === artistName);
+    navigation.navigate("ArtistSongs", { artistName, artistSongs });
   };
 
   useEffect(() => {
-    setSongs(originalSongs);
-  }, [searchTerm]);
+    setArtists([...new Set(originalSongs.map((song) => song.artist))]);
+  }, [originalSongs]); // Make sure to include originalSongs in the dependency array
+
+  useFocusEffect(
+    React.useCallback(() => {
+      setSearchTerm(""); // Reset search term when the screen gains focus
+    }, [])
+  );
 
   return (
     <View>
       <TextInput
         style={styles.input}
-        placeholder="Search for a song or artist"
+        placeholder="Search for an artist"
         value={searchTerm}
         onChangeText={setSearchTerm}
       />
-      <TouchableOpacity style={styles.searchButton} onPress={searchSongs}>
+      <TouchableOpacity style={styles.searchButton} onPress={searchArtists}>
         <Text style={styles.buttonText}>Search</Text>
       </TouchableOpacity>
       <FlatList
-        data={songs}
-        keyExtractor={(item) => item.id}
+        data={artists}
+        keyExtractor={(item) => item}
         renderItem={({ item }) => (
           <TouchableOpacity
-            style={styles.songItem}
-            onPress={() => navigateToFullChords(item)}
+            style={styles.artistItem}
+            onPress={() => navigateToArtistSongs(item)}
           >
-            <Text style={styles.title}>{item.title}</Text>
-            {item.artist && <Text style={styles.artist}>Artist: {item.artist}</Text>}
-            <Text style={styles.chords}>Chords: {item.chords}</Text>
+            <Text style={styles.artist}>{item}</Text>
           </TouchableOpacity>
         )}
       />
@@ -110,23 +116,17 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
   },
-  songItem: {
+  artistItem: {
     marginBottom: 20,
     borderWidth: 1,
     padding: 10,
     borderRadius: 5,
   },
-  title: {
+  artist: {
     fontSize: 18,
     fontWeight: "bold",
     textDecorationLine: "underline",
   },
-  artist: {
-    fontSize: 16,
-  },
-  chords: {
-    fontSize: 16,
-  },
 });
 
-export default SongList;
+export default Artists;

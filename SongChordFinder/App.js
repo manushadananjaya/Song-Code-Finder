@@ -10,6 +10,8 @@ import { StyleSheet, SafeAreaView } from "react-native";
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
+import Artists from "./screens/Artists";
+import ArtistSongs from "./screens/ArtistSongs";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -31,9 +33,14 @@ const HomeStackScreen = () => (
 const ArtistScreen = () => (
   <Stack.Navigator>
     <Stack.Screen
-      name="Home"
-      component={SongList}
-      options={{ title: 'Song List' }}
+      name="Artists"
+      component={Artists}
+      options={{ title: 'Artists' }}
+    />
+    <Stack.Screen
+      name="ArtistSongs"
+      component={ArtistSongs}
+      options={{ title: 'Artist Songs' }}
     />
     <Stack.Screen
       name="FullChord"
@@ -42,6 +49,7 @@ const ArtistScreen = () => (
     />
   </Stack.Navigator>
 );
+
 
 export default function App() {
   const isLoadingComplete = useLoadedAssets();
