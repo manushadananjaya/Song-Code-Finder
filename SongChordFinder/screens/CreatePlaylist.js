@@ -10,7 +10,6 @@ const CreatePlaylist = () => {
   const [playlistName, setPlaylistName] = useState('');
   const navigation = useNavigation();
 
-  // Mock data for available songs (replace it with your actual data)
   const mockSongs = [
     { id: '1', title: 'Song 1' },
     { id: '2', title: 'Song 2' },
@@ -19,7 +18,6 @@ const CreatePlaylist = () => {
   ];
 
   const handleSearch = () => {
-    // Simulate a search logic (replace it with your actual search logic)
     const filteredSongs = mockSongs.filter((song) =>
       song.title.toLowerCase().includes(searchTerm.toLowerCase())
     );
@@ -27,24 +25,30 @@ const CreatePlaylist = () => {
   };
 
   const handleAddToPlaylist = (song) => {
-    // Add the selected song to the playlist
     setSelectedSongs((prevSongs) => [...prevSongs, song]);
   };
 
   const handleCreatePlaylist = () => {
     if (playlistName.trim() === '' || selectedSongs.length === 0) {
-      // Show an alert if the playlist name is empty or no songs are selected
       Alert.alert('Error', 'Please enter a playlist name and add songs to create a playlist.');
       return;
     }
 
-    // Save the playlist and selected songs
     const newPlaylist = { name: playlistName, songs: selectedSongs };
-    // You can handle saving the playlist in your application's state, context, or server
+
+    // TODO: Handle saving the playlist in your application's state, context, or server
 
     // Navigate to the Playlists screen or any other screen after creating the playlist
     navigation.navigate('Playlists', { newPlaylist });
   };
+
+  useEffect(() => {
+    // Optional: Clear the form fields and search results after creating the playlist
+    setPlaylistName('');
+    setSelectedSongs([]);
+    setSearchResults([]);
+    setSearchTerm('');
+  }, []); // Empty dependency array to avoid re-renders caused by this useEffect
 
   return (
     <View style={styles.container}>

@@ -1,10 +1,11 @@
 // Playlists.js
 import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useIsFocused } from '@react-navigation/native';
 
-const Playlists = () => {
+const Playlists = ({ route }) => {
   const [playlists, setPlaylists] = useState([]);
+  const isFocused = useIsFocused();
   const navigation = useNavigation();
 
   useEffect(() => {
@@ -18,7 +19,7 @@ const Playlists = () => {
     };
 
     fetchPlaylists();
-  }, []);
+  }, [isFocused, route.params]);
 
   const navigateToPlaylistDetail = (playlist) => {
     // Implement navigation to the playlist screen with songs
@@ -30,6 +31,11 @@ const Playlists = () => {
     // Navigate to the screen where users can create a new playlist
     navigation.navigate('CreatePlaylist');
   };
+
+  // Check if there is a new playlist added and update the playlists
+  if (route.params && route.params.newPlaylist) {
+    setPlaylists((prevPlaylists) => [...prevPlaylists, route.params.newPlaylist]);
+  }
 
   const renderPlaylistItem = ({ item }) => (
     <TouchableOpacity

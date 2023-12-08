@@ -15,9 +15,23 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import Playlists from "./screens/PlayLists";
 import CreatePlaylist from "./screens/CreatePlaylist";
+import Dashboard from "./screens/DashBoard";
+
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
+
+const DashboardScreen = () => (
+  <Stack.Navigator>
+    {/* Add screens for the dashboard here */}
+    <Stack.Screen
+      name="Dashboard"
+      component={Dashboard}
+      options={{ title: 'Dashboard' }}
+    />
+    {/* Add more screens if needed */}
+  </Stack.Navigator>
+);
 
 const PlaylistsStackScreen = () => (
   <Stack.Navigator>
@@ -80,7 +94,8 @@ const App = () => {
       <SafeAreaProvider>
         <NavigationContainer>
           <Tab.Navigator>
-            <Tab.Screen name="Home" component={HomeStackScreen} />
+            <Tab.Screen name="Dashboard" component={DashboardScreen} />
+            <Tab.Screen name="Songs" component={HomeStackScreen} />
             <Tab.Screen name="Artists" component={ArtistScreen} />
             <Tab.Screen name="Tuner" component={Tunner} />
             <Tab.Screen name="Playlists" component={PlaylistsStackScreen} />
