@@ -2,7 +2,6 @@ import React from "react";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { useLoadedAssets } from "./hooks/useLoadedAssets";
-import Navigation from "./navigation";
 import { useColorScheme } from "react-native";
 import SongList from "./screens/SongList.js";
 import FullChord from "./screens/FullChords";
@@ -10,13 +9,30 @@ import Artists from "./screens/Artists";
 import ArtistSongs from "./screens/ArtistSongs";
 import Tunner from "./screens/Tunner"; // Assuming you have a Tunner component
 import Profile from "./screens/Profile"; // Assuming you have a Profile component
-import { StyleSheet, SafeAreaView, TouchableOpacity, Text } from "react-native";
+import { StyleSheet, TouchableOpacity, Text } from "react-native";
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
+import Playlists from "./screens/PlayLists";
+import CreatePlaylist from "./screens/CreatePlaylist";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
+
+const PlaylistsStackScreen = () => (
+  <Stack.Navigator>
+    <Stack.Screen
+      name="Playlists"
+      component={Playlists}
+      options={{ title: 'Playlists' }}
+    />
+    <Stack.Screen
+      name="CreatePlaylist"
+      component={CreatePlaylist}
+      options={{ title: 'Create Playlist' }}
+    />
+  </Stack.Navigator>
+);
 
 const HomeStackScreen = () => (
   <Stack.Navigator>
@@ -66,7 +82,8 @@ const App = () => {
           <Tab.Navigator>
             <Tab.Screen name="Home" component={HomeStackScreen} />
             <Tab.Screen name="Artists" component={ArtistScreen} />
-            <Tab.Screen name="Tunner" component={Tunner} />
+            <Tab.Screen name="Tuner" component={Tunner} />
+            <Tab.Screen name="Playlists" component={PlaylistsStackScreen} />
           </Tab.Navigator>
           <TouchableOpacity
             style={styles.profileButton}
