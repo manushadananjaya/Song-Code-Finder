@@ -40,17 +40,21 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 16,
+    backgroundColor: "#f0f0f0", // Background color
   },
   title: {
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 16,
+    color: "#333", // Text color
   },
   button: {
-    backgroundColor: "blue",
-    padding: 12,
+    backgroundColor: "#3498db", // Button background color
+    padding: 16,
     borderRadius: 8,
     marginTop: 16,
+    width: 200, // Button width
+    alignItems: "center", // Center content horizontally
   },
   buttonText: {
     color: "white",

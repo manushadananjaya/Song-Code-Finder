@@ -18,6 +18,8 @@ import CreatePlaylist from "./screens/CreatePlaylist";
 import Dashboard from "./screens/DashBoard";
 
 
+
+
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -34,6 +36,7 @@ const DashboardScreen = () => (
       component={Tuner}
       options={{ title: 'Tuner' }}
     />
+    
     {/* Add more screens if needed */}
   </Stack.Navigator>
 );
