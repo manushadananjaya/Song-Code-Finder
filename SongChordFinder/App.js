@@ -7,7 +7,7 @@ import SongList from "./screens/SongList.js";
 import FullChord from "./screens/FullChords";
 import Artists from "./screens/Artists";
 import ArtistSongs from "./screens/ArtistSongs";
-import Tunner from "./screens/Tunner"; // Assuming you have a Tunner component
+import Tuner from "./screens/Tuner"; // Assuming you have a Tuner component
 import Profile from "./screens/Profile"; // Assuming you have a Profile component
 import { StyleSheet, TouchableOpacity, Text } from "react-native";
 import { NavigationContainer } from '@react-navigation/native';
@@ -28,6 +28,11 @@ const DashboardScreen = () => (
       name="Dashboard"
       component={Dashboard}
       options={{ title: 'Dashboard' }}
+    />
+    <Stack.Screen
+      name="Tuner"
+      component={Tuner}
+      options={{ title: 'Tuner' }}
     />
     {/* Add more screens if needed */}
   </Stack.Navigator>
@@ -97,7 +102,7 @@ const App = () => {
             <Tab.Screen name="Dashboard" component={DashboardScreen} />
             <Tab.Screen name="Songs" component={HomeStackScreen} />
             <Tab.Screen name="Artists" component={ArtistScreen} />
-            <Tab.Screen name="Tuner" component={Tunner} />
+            {/* <Tab.Screen name="Tuner" component={Tuner} /> */}
             <Tab.Screen name="Playlists" component={PlaylistsStackScreen} />
           </Tab.Navigator>
           <TouchableOpacity
