@@ -1,6 +1,6 @@
 // FullCode.js
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, ScrollView, StyleSheet } from 'react-native';
 
 const FullCode = ({ route }) => {
   const { selectedSong } = route.params;
@@ -9,7 +9,9 @@ const FullCode = ({ route }) => {
     <View style={styles.container}>
       <Text style={styles.title}>{selectedSong.title}</Text>
       <Text style={styles.chords}>Chords: {selectedSong.chords}</Text>
-      <Text style={styles.lyrics}>Lyrics: {selectedSong.lyrics}</Text>
+      <ScrollView style={styles.lyricsContainer}>
+        <Text style={styles.lyrics}>{selectedSong.lyrics}</Text>
+      </ScrollView>
     </View>
   );
 };
@@ -28,6 +30,10 @@ const styles = StyleSheet.create({
   chords: {
     fontSize: 18,
     marginBottom: 10,
+  },
+  lyricsContainer: {
+    flex: 1,
+    marginBottom: 20,
   },
   lyrics: {
     fontSize: 16,

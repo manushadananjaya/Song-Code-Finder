@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet,TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Audio } from 'expo-av';
 
 const Tuner = () => {
@@ -41,6 +41,7 @@ const Tuner = () => {
       setIsTuning(true);
     } catch (error) {
       console.error('Failed to start recording', error);
+      // Handle the error here, e.g., show an alert or log it
     }
   };
 
@@ -54,6 +55,7 @@ const Tuner = () => {
       setIsTuning(false);
     } catch (error) {
       console.error('Failed to stop recording', error);
+      // Handle the error here, e.g., show an alert or log it
     }
   };
 
