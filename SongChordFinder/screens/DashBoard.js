@@ -20,7 +20,7 @@ const Dashboard = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Welcome to Your App!</Text>
+      <Text style={styles.title}>Welcome!</Text>
       <TouchableOpacity style={styles.button} onPress={navigateToSongList}>
         <Text style={styles.buttonText}>View Songs</Text>
       </TouchableOpacity>
