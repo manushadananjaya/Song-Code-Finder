@@ -4,7 +4,7 @@ import { View, Text, ScrollView, StyleSheet, TouchableOpacity } from 'react-nati
 const FullCode = ({ route }) => {
   const { selectedSong } = route.params;
   const [selectedScale, setSelectedScale] = useState('C');
-  const [isScalePanelVisible, setIsScalePanelVisible] = useState(true);
+  const [isScalePanelVisible, setIsScalePanelVisible] = useState(false);
 
   const scaleChords = {
     // ... (your existing scale chords)
