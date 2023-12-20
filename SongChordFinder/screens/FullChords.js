@@ -3,38 +3,41 @@ import { View, Text, ScrollView, StyleSheet, TouchableOpacity } from 'react-nati
 
 const FullCode = ({ route }) => {
   const { selectedSong } = route.params;
-  const [selectedScale, setSelectedScale] = useState('C');
+  const [selectedScale, setSelectedScale] = useState(`${selectedSong.default}`);
   const [isScalePanelVisible, setIsScalePanelVisible] = useState(false);
 
-  const scaleChords = {
-    // ... (your existing scale chords)
-     // ... (your existing scale chords)
-      // ... (your existing scale chords)
-      Ab: ['C', 'Dm', 'Em', 'F', 'G', 'Am', 'Bdim'],
-      A: ['D', 'Em', 'F#m', 'G', 'A', 'Bm', 'C#dim'],
-      'A#': ['E', 'F#m', 'G#m', 'A', 'B', 'C#m', 'D#dim'],
-      Bb: ['E', 'F#m', 'G#m', 'A', 'B', 'C#m', 'D#dim'],
-      B: ['E', 'F#m', 'G#m', 'A', 'B', 'C#m', 'D#dim'],
-      C: ['C', 'Dm', 'Em', 'F', 'G', 'Am', 'Bdim'],
-      'C#': ['C', 'Dm', 'Em', 'F', 'G', 'Am', 'Bdim'],
-      Db: ['C', 'Dm', 'Em', 'F', 'G', 'Am', 'Bdim'],
-      D: ['D', 'Em', 'F#m', 'G', 'A', 'Bm', 'C#dim'],
-      'D#': ['E', 'F#m', 'G#m', 'A', 'B', 'C#m', 'D#dim'],
-      Eb: ['E', 'F#m', 'G#m', 'A', 'B', 'C#m', 'D#dim'],
-      E: ['E', 'F#m', 'G#m', 'A', 'B', 'C#m', 'D#dim'],
-      F: ['C', 'Dm', 'Em', 'F', 'G', 'Am', 'Bdim'],
-      'F#': ['C', 'Dm', 'Em', 'F', 'G', 'Am', 'Bdim'],
-      Gb: ['C', 'Dm', 'Em', 'F', 'G', 'Am', 'Bdim'],
-      G: ['D', 'Em', 'F#m', 'G', 'A', 'Bm', 'C#dim'],
-      'G#': ['E', 'F#m', 'G#m', 'A', 'B', 'C#m', 'D#dim'],
+  // Define lyrics for each scale
+  const scaleLyrics = {
+    
+    Ab: selectedSong.lyrics2,
+    A: selectedSong.lyrics3,
+    'A#': selectedSong.lyrics4,
+    Bb: selectedSong.lyrics5,
+    B: selectedSong.lyrics6,
+    C: selectedSong.lyrics7,
+    'C#': selectedSong.lyrics8,
+    Db: selectedSong.lyrics9,
+    D: selectedSong.lyrics10,
+    'D#': selectedSong.lyrics11,
+    Eb: selectedSong.lyrics12,
+    E: selectedSong.lyrics13,
+    F: selectedSong.lyrics14,
+    'F#': selectedSong.lyrics15,
+    Gb: selectedSong.lyrics16,
+    G: selectedSong.lyrics17,
+    'G#': selectedSong.lyrics18,
+    
+    // Add more scales and corresponding lyrics as needed
   };
 
   const getChordsForScale = (scale) => {
-    return scaleChords[scale] || [];
+    // Assume this function returns chords based on the selected scale
+    // You can implement this function as needed
+    return [];
   };
 
   const renderScaleButtons = () => {
-    const scales = Object.keys(scaleChords);
+    const scales = Object.keys(scaleLyrics);
 
     return (
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
@@ -47,7 +50,9 @@ const FullCode = ({ route }) => {
                   styles.scaleButton,
                   { backgroundColor: selectedScale === scale ? 'blue' : 'gray' },
                 ]}
-                onPress={() => setSelectedScale(scale)}
+                onPress={() => {
+                  setSelectedScale(scale);
+                }}
               >
                 <Text style={styles.scaleButtonText}>{scale}</Text>
               </TouchableOpacity>
@@ -63,7 +68,7 @@ const FullCode = ({ route }) => {
       <Text style={styles.title}>{selectedSong.title}</Text>
       {/* <Text style={styles.chords}>Chords: {getChordsForScale(selectedScale).join(', ')}</Text> */}
       <ScrollView style={styles.lyricsContainer}>
-        <Text style={styles.lyrics}>{selectedSong.lyrics}</Text>
+        <Text style={styles.lyrics}>{scaleLyrics[selectedScale]}</Text>
       </ScrollView>
 
       <TouchableOpacity
@@ -100,7 +105,7 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   lyrics: {
-    fontSize:16,
+    fontSize: 16,
   },
   scaleButtonsContainer: {
     flexDirection: 'row',

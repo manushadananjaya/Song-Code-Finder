@@ -58,7 +58,7 @@ const SongList = () => {
             {item.artist && (
               <Text style={styles.artist}>Artist: {item.artist}</Text>
             )}
-            <Text style={styles.chords}>Chords: {item.chords}</Text>
+            <Text style={styles.chords}>Key: {item.key}</Text>
           </TouchableOpacity>
         )}
       />
