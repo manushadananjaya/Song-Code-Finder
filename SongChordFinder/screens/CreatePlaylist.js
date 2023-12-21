@@ -37,6 +37,14 @@ const CreatePlaylist = () => {
     const newPlaylist = { name: playlistName, songs: selectedSongs };
 
     // TODO: Handle saving the playlist in your application's state, context, or server
+    // For now, just log the new playlist to the console
+    console.log('New Playlist:', newPlaylist);
+
+    // Optional: Clear the form fields and search results after creating the playlist
+    setPlaylistName('');
+    setSelectedSongs([]);
+    setSearchResults([]);
+    setSearchTerm('');
 
     // Navigate to the Playlists screen or any other screen after creating the playlist
     navigation.navigate('Playlists', { newPlaylist });
